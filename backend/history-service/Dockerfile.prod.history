@@ -15,6 +15,7 @@ FROM amd64/node:alpine AS prod-stage
 
 ARG DB_URI
 ARG QUESTION_URL
+ARG FRONTEND_URL
 
 WORKDIR /history-service
 
@@ -25,6 +26,7 @@ RUN yarn install --production
 COPY --from=build-stage /history-service/dist .
 
 ENV QUESTION_URL=${QUESTION_URL}
+ENV FRONTEND_URL=${FRONTEND_URL}
 ENV DB_URI=${DB_URI}
 
 ENV ENV=production

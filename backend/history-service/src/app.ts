@@ -18,10 +18,7 @@ const database = mongoose.connection;
 database.on('error', console.error.bind(console, 'MongoDB Connection Error: '));
 
 // TODO: Might have to add chat-service in
-const allowedOrigins = [
-  'http://alb-peerprep-2137662650.ap-southeast-1.elb.amazonaws.com',
-  'http://localhost:3000',
-];
+const allowedOrigins = [process.env.FRONTEND_URL, 'http://localhost:3000'];
 
 console.log(allowedOrigins);
 

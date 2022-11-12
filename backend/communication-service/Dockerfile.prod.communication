@@ -13,6 +13,8 @@ RUN yarn build
 
 FROM amd64/node:alpine AS prod-stage
 
+ARG FRONTEND_URL
+
 WORKDIR /communication-service
 
 COPY ./package.json ./
@@ -21,6 +23,7 @@ RUN yarn install --production
 
 COPY --from=build-stage /communication-service/dist .
 
+ENV FRONTEND_URL=${FRONTEND_URL}
 ENV ENV=production
 ENV PORT=8006
 

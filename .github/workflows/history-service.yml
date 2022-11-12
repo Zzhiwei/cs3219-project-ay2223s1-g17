@@ -2,7 +2,7 @@ name: Deploy History Service
 
 on:
   push:
-    branches: ['production']
+    branches: ['staging']
 
 env:
   AWS_REGION: ap-southeast-1 # set this to your preferred AWS region, e.g. us-west-1
@@ -49,6 +49,7 @@ jobs:
           docker build -f backend/history-service/Dockerfile.prod.history \
               --build-arg "DB_URI=${{ secrets.HISTORY_DB_URI }}" \
               --build-arg "QUESTION_URL=${{ secrets.QUESTION_URL }}" \
+              --build-arg "FRONTEND_URL=${{ secrets.FRONTEND_URL }}" \
               -t $ECR_REPOSITORY backend/history-service/
           docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest;
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest

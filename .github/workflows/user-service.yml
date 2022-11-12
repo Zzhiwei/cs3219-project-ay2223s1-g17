@@ -2,7 +2,7 @@ name: Deploy User Service
 
 on:
   push:
-    branches: ['production']
+    branches: ['staging']
 
 env:
   AWS_REGION: ap-southeast-1 # set this to your preferred AWS region, e.g. us-west-1
@@ -52,6 +52,7 @@ jobs:
               --build-arg "HISTORY_URL=${{ secrets.HISTORY_URL }}" \
               --build-arg "STATISTICS_URL=${{ secrets.STATISTICS_URL }}" \
               --build-arg "STATISTICS_CREATION_URL=${{ secrets.STATISTICS_CREATION_URL }}" \
+              --build-arg "FRONTEND_URL=${{ secrets.FRONTEND_URL }}" \
               -t $ECR_REPOSITORY backend/user-service/
           docker tag $ECR_REPOSITORY:latest $ECR_REGISTRY/$ECR_REPOSITORY:latest;
           docker push $ECR_REGISTRY/$ECR_REPOSITORY:latest
