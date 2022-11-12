@@ -23,7 +23,7 @@ RUN yarn install --production
 
 COPY --from=build-stage /communication-service/dist .
 
-ENV FRONTEND_URL=${FRONTEND_URL}
+ENV FRONTEND_URL=http://alb-peerprep-865449659.ap-southeast-1.elb.amazonaws.com
 ENV ENV=production
 ENV PORT=8006
 

@@ -25,9 +25,12 @@ RUN yarn install --production
 
 COPY --from=build-stage /history-service/dist .
 
-ENV QUESTION_URL=${QUESTION_URL}
-ENV FRONTEND_URL=${FRONTEND_URL}
-ENV DB_URI=${DB_URI}
+# ENV QUESTION_URL=${QUESTION_URL}
+# ENV FRONTEND_URL=${FRONTEND_URL}
+# ENV DB_URI=${DB_URI}
+ENV QUESTION_URL=http://alb-question-76737482.ap-southeast-1.elb.amazonaws.com
+ENV FRONTEND_URL=http://alb-peerprep-865449659.ap-southeast-1.elb.amazonaws.com
+ENV DB_URI=mongodb+srv://cs3219:cs3219@cluster0.bnrscil.mongodb.net/?retryWrites=true&w=majority
 
 ENV ENV=production
 ENV PORT=8005

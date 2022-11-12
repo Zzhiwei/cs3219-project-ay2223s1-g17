@@ -14,6 +14,7 @@ RUN yarn build
 FROM amd64/node:alpine AS prod-stage
 
 ARG DB_URI
+ARG FRONTEND_URL
 
 WORKDIR /question-service
 
@@ -23,7 +24,10 @@ RUN yarn install --production
 
 COPY --from=build-stage /question-service/dist .
 
-ENV DB_URI=${DB_URI}
+# ENV DB_URI=${DB_URI}
+# ENV FRONTEND_URL=${FRONTEND_URL}
+ENV DB_URI=mongodb+srv://3219group17:3219group17@cluster0.cjyzex1.mongodb.net/?retryWrites=true&w=majority
+ENV FRONTEND_URL=http://alb-peerprep-865449659.ap-southeast-1.elb.amazonaws.com
 ENV ENV=production
 ENV PORT=8003
 
